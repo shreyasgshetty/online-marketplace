@@ -4,8 +4,9 @@ import { states } from "../data/locationData";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { 
   User, Mail, Phone, MapPin, Map as MapIcon, 
-  Camera, Save, X, Globe, Building 
+  Camera, Save, X, Globe, Building, ArrowLeft 
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Helper component for map clicks
 function LocationSelector({ setLocation }) {
@@ -31,6 +32,7 @@ function Profile() {
   const [location, setLocation] = useState({ lat: 20.5937, lng: 78.9629 });
   const [mapOpen, setMapOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!email) {
@@ -107,6 +109,20 @@ function Profile() {
       <div className="h-48 bg-gradient-to-r from-blue-600 to-indigo-700"></div>
 
       <div className="max-w-5xl mx-auto -mt-24 px-4">
+        <div className="flex items-center mb-6">
+
+<button
+  onClick={() => navigate(-1)}
+  className="flex items-center gap-2 text-sm font-semibold text-blue-600 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm hover:bg-blue-50 hover:shadow-md transition-all"
+>
+
+<ArrowLeft size={18} />
+
+
+
+</button>
+
+</div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Left Column: User Summary */}
