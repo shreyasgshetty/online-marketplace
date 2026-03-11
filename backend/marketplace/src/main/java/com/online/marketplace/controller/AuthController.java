@@ -16,15 +16,25 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-
         return userService.register(user);
-
     }
 
     @PostMapping("/login")
     public User login(@RequestBody User user) {
-
         return userService.login(user.getEmail(), user.getPassword());
+    }
 
+    // -------- GET PROFILE --------
+
+    @GetMapping("/profile/{email}")
+    public User getProfile(@PathVariable String email) {
+        return userService.getUserByEmail(email);
+    }
+
+    // -------- UPDATE PROFILE --------
+
+    @PutMapping("/profile/{email}")
+    public User updateProfile(@PathVariable String email, @RequestBody User user) {
+        return userService.updateProfile(email, user);
     }
 }
