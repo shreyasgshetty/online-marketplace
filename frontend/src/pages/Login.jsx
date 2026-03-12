@@ -29,6 +29,9 @@ email,
 password
 });
 
+localStorage.setItem("user", JSON.stringify(res.data));
+localStorage.setItem("email", res.data.email);
+
 toast.success("Login successful 🎉",{
 style:{borderLeft:"5px solid #3b82f6"}
 });
@@ -64,6 +67,9 @@ email:user.email,
 password:"GOOGLE_AUTH"
 
 });
+
+localStorage.setItem("user", JSON.stringify(res.data));
+localStorage.setItem("email", res.data.email);
 
 toast.success("Logged in with Google 🚀",{
 style:{borderLeft:"5px solid #3b82f6"}

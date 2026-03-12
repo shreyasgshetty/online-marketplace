@@ -23,18 +23,15 @@ public class UserService {
 
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 
-        // If user already exists
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
 
         user.setRole(Role.USER);
 
-        // Handle Google login users
         if (user.getPassword() == null || user.getPassword().equals("GOOGLE_AUTH")) {
             user.setPassword("GOOGLE_AUTH");
         } else {
-            // Hash normal password
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
@@ -51,7 +48,6 @@ public class UserService {
 
         User user = existingUser.get();
 
-        // Google users
         if (user.getPassword().equals("GOOGLE_AUTH")) {
             return user;
         }
@@ -61,5 +57,31 @@ public class UserService {
         }
 
         throw new RuntimeException("Invalid password");
+    }
+
+    // -------- GET USER PROFILE --------
+
+    public User getUserByEmail(String email) {
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    // -------- UPDATE USER PROFILE --------
+
+    public User updateProfile(String email, User updatedUser) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setPhone(updatedUser.getPhone());
+        user.setAddress(updatedUser.getAddress());
+        user.setCity(updatedUser.getCity());
+        user.setState(updatedUser.getState());
+        user.setLatitude(updatedUser.getLatitude());
+        user.setLongitude(updatedUser.getLongitude());
+        user.setProfilePictureUrl(updatedUser.getProfilePictureUrl());
+
+        return userRepository.save(user);
     }
 }

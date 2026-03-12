@@ -14,6 +14,14 @@ public class User {
     private String password;
     private Role role;
 
+    private String phone;
+    private String address;
+    private String profilePictureUrl;
+    private String city;
+    private String state;
+    private double latitude;
+    private double longitude;
+
     public User() {
     }
 
@@ -23,6 +31,8 @@ public class User {
         this.password = password;
         this.role = role;
     }
+
+    // ---------- GETTERS ----------
 
     public String getId() {
         return id;
@@ -44,6 +54,40 @@ public class User {
         return role;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    // ---------- SETTERS ----------
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -58,5 +102,33 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

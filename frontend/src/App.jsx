@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import FinanceDashboard from "./pages/FinanceManager/FinanceDashboard";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import SellProduct from "./pages/SellProduct";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/finance" element={<FinanceDashboard />} />
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/sell" element={<SellProduct />} />
         </Routes>
       </BrowserRouter>
     </div>
