@@ -100,7 +100,7 @@ function SellProduct() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* LEFT COLUMN: LIVE PREVIEW CARD */}
-          <div className="lg:col-span-4 sticky top-12 space-y-6 hidden lg:block">
+          <div className="lg:col-span-4 sticky top-12 self-start space-y-6 hidden lg:block">
             <div className="bg-white/70 backdrop-blur-xl rounded-[2rem] p-2 border border-white shadow-2xl">
               <div className="aspect-[4/5] bg-slate-100 rounded-[1.6rem] overflow-hidden relative">
                 {images.length > 0 ? (
@@ -246,6 +246,30 @@ className="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-transparent 
                       value={description} onChange={(e) => setDescription(e.target.value)}
                       className="w-full bg-slate-50 p-6 rounded-3xl border-2 border-transparent focus:border-indigo-500 outline-none transition-all"
                     />
+
+                    <div className="space-y-2">
+<label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">
+Tags
+</label>
+
+<input
+  placeholder="e.g. iphone, mobile, apple (comma separated)"
+  value={tags}
+  onChange={(e) => setTags(e.target.value)}
+  className="w-full bg-slate-50 px-6 py-4 rounded-2xl border-2 border-transparent focus:border-indigo-500 focus:bg-white outline-none transition-all"
+/>
+
+<p className="text-xs text-slate-400 ml-1">
+Use tags to help buyers find your product faster.
+</p>
+<div className="flex flex-wrap gap-2 mt-3">
+{tags.split(",").filter(tag => tag.trim() !== "").map((tag,i)=>(
+<span key={i} className="bg-indigo-100 text-indigo-700 text-xs px-3 py-1 rounded-full">
+#{tag.trim()}
+</span>
+))}
+</div>
+</div>
                   </div>
                </div>
             </div>

@@ -8,11 +8,22 @@ import {
   X,
   ShoppingBag
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+  localStorage.removeItem("user");   // remove user object
+  localStorage.removeItem("email");  // optional (if used)
+
+  setProfileOpen(false);
+
+  navigate("/login");
+};
 
   return (
 
@@ -106,12 +117,20 @@ function Navbar() {
           <div className="relative">
 
             <button
-              onClick={()=>setProfileOpen(!profileOpen)}
+              onClick={() => {
+              const user = localStorage.getItem("user");
+                          
+              if (!user) {
+                navigate("/login");
+              } else {
+                setProfileOpen(!profileOpen);
+              }
+            }}
               className="flex items-center gap-2 p-1 pr-3 bg-white border border-gray-200 rounded-full hover:shadow-md transition"
             >
 
               <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
-                U
+                {JSON.parse(localStorage.getItem("user"))?.name?.charAt(0) || "U"}
               </div>
 
               <ChevronDown className="w-4 h-4 text-gray-400"/>
@@ -136,7 +155,10 @@ function Navbar() {
 
                 <div className="border-t my-2"/>
 
-                <button className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition">
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition"
+                >
                   Logout
                 </button>
 

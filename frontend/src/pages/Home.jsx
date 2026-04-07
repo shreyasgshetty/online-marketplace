@@ -1,6 +1,31 @@
+import { useEffect,useState } from "react";
+import API from "../services/api";
+
 import Navbar from "../components/Navbar";
+import HeroCarousel from "../components/HeroCarousel";
+import ProductCarousel from "../components/ProductCarousel";
+import CategoryBanners from "../components/CategoryBanners";
 
 function Home(){
+
+const [trending,setTrending]=useState([]);
+const [recommended,setRecommended]=useState([]);
+
+useEffect(()=>{
+
+loadHome();
+
+},[]);
+
+const loadHome=async()=>{
+
+const trendingRes=await API.get("/api/products/trending");
+const recommendedRes=await API.get("/api/products/recommended");
+
+setTrending(trendingRes.data);
+setRecommended(recommendedRes.data);
+
+};
 
 return(
 
@@ -8,25 +33,27 @@ return(
 
 <Navbar/>
 
-<div className="p-10">
+<div className="max-w-7xl mx-auto p-6">
 
-<h1 className="text-3xl font-bold">
+<HeroCarousel/>
 
-Welcome to Marketplace
+<ProductCarousel
+title="Trending Products"
+products={trending}
+/>
 
-</h1>
+<CategoryBanners/>
 
-<p className="mt-4 text-gray-600">
-
-Browse products from different categories.
-
-</p>
+<ProductCarousel
+title="Recommended For You"
+products={recommended}
+/>
 
 </div>
 
 </div>
 
-)
+);
 
 }
 
