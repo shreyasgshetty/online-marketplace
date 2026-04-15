@@ -26,6 +26,7 @@ function SellProduct() {
   const [auctionEnd, setAuctionEnd] = useState("");
   const [negotiable, setNegotiable] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [bidIncrement, setBidIncrement] = useState("");
   
 
   const uploadImages = async (e) => {
@@ -61,6 +62,7 @@ function SellProduct() {
       sellingType,
       price: sellingType === "fixed" ? price : null,
       baseBidPrice: sellingType === "auction" ? baseBidPrice : null,
+      bidIncrement,
       auctionStart, auctionEnd,
       negotiable,
       city: user.city,
@@ -316,6 +318,11 @@ Use tags to help buyers find your product faster.
                     <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Opening Bid</label>
                     <input type="number" value={baseBidPrice} onChange={(e) => setBaseBidPrice(e.target.value)} className="w-full p-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-500 outline-none font-bold" />
                   </div>
+                  <div className="space-y-2">
+                    <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Bid Increment</label>
+                    <input type="number" value={bidIncrement} onChange={(e) => setBidIncrement(e.target.value)} className="w-full p-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-500 outline-none font-bold" />
+                  </div>
+                  
                   <div className="space-y-2">
                     <label className="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 ml-1">Starts</label>
                     <input type="datetime-local" value={auctionStart} onChange={(e) => setAuctionStart(e.target.value)} className="w-full p-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-500 outline-none text-sm" />

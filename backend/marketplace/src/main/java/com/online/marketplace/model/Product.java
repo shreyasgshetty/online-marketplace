@@ -30,6 +30,7 @@ public class Product {
     private Double price;
 
     private Double baseBidPrice;
+    private Double bidIncrement;
 
     private LocalDateTime auctionStart;
     private LocalDateTime auctionEnd;
@@ -134,6 +135,14 @@ public class Product {
 
     public void setBaseBidPrice(Double baseBidPrice) {
         this.baseBidPrice = baseBidPrice;
+    }
+
+    public Double getBidIncrement() {
+        return bidIncrement;
+    }
+
+    public void setBidIncrement(Double bidIncrement) {
+        this.bidIncrement = bidIncrement;
     }
 
     public LocalDateTime getAuctionStart() {

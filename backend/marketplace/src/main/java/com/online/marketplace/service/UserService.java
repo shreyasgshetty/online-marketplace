@@ -1,8 +1,8 @@
 package com.online.marketplace.service;
 
-import com.online.marketplace.model.Role;
 import com.online.marketplace.model.User;
 import com.online.marketplace.repository.UserRepository;
+import com.online.marketplace.factory.UserFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,19 +23,15 @@ public class UserService {
 
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 
+        // If user already exists → return existing (for Google login case)
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
 
-        user.setRole(Role.USER);
+        // Create user using Factory
+        User newUser = UserFactory.createUser(user, passwordEncoder);
 
-        if (user.getPassword() == null || user.getPassword().equals("GOOGLE_AUTH")) {
-            user.setPassword("GOOGLE_AUTH");
-        } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-
-        return userRepository.save(user);
+        return userRepository.save(newUser);
     }
 
     public User login(String email, String password) {
