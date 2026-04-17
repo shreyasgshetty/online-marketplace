@@ -44,6 +44,11 @@ public class UserService {
 
         User user = existingUser.get();
 
+        boolean active = user.getActive() == null || user.getActive();
+        if (!active) {
+            throw new RuntimeException("User account is inactive");
+        }
+
         if (user.getPassword().equals("GOOGLE_AUTH")) {
             return user;
         }

@@ -21,7 +21,11 @@ public class User {
     private String state;
     private double latitude;
     private double longitude;
+<<<<<<< Updated upstream
     private Double walletBalance = 0.0;
+=======
+    private Boolean active = true;
+>>>>>>> Stashed changes
 
     public User() {
     }
@@ -83,8 +87,13 @@ public class User {
         return longitude;
     }
 
+<<<<<<< Updated upstream
     public Double getWalletBalance() {
         return walletBalance;
+=======
+    public Boolean getActive() {
+        return active;
+>>>>>>> Stashed changes
     }
 
     // ---------- SETTERS ----------
@@ -137,8 +146,14 @@ public class User {
         this.longitude = longitude;
     }
 
+<<<<<<< Updated upstream
     public void setWalletBalance(Double walletBalance) {
         this.walletBalance = walletBalance;
     }
 
+=======
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+>>>>>>> Stashed changes
 }

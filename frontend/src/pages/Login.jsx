@@ -97,7 +97,7 @@ navigate("/");
 
 else if(role === "ADMIN"){
 
-navigate("/admin");
+navigate("/admin/dashboard");
 
 }
 

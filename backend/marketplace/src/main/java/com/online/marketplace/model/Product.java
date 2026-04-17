@@ -41,6 +41,9 @@ public class Product {
     private List<String> tags;
 
     private LocalDateTime createdAt;
+    private String moderationStatus;
+    private LocalDateTime reviewedAt;
+    private String rejectionReason;
 
     private Double currentBid;
     private String highestBidder;
@@ -196,6 +199,7 @@ public class Product {
         this.createdAt = createdAt;
     }
 
+<<<<<<< Updated upstream
     public Double getCurrentBid() {
         return currentBid;
     }
@@ -212,4 +216,29 @@ public class Product {
         this.highestBidder = highestBidder;
     }
 
+=======
+    public String getModerationStatus() {
+        return moderationStatus;
+    }
+
+    public void setModerationStatus(String moderationStatus) {
+        this.moderationStatus = moderationStatus;
+    }
+
+    public LocalDateTime getReviewedAt() {
+        return reviewedAt;
+    }
+
+    public void setReviewedAt(LocalDateTime reviewedAt) {
+        this.reviewedAt = reviewedAt;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+>>>>>>> Stashed changes
 }

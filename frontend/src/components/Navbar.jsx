@@ -15,6 +15,7 @@ function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("user") || "null");
 
   const handleLogout = () => {
   localStorage.removeItem("user");   // remove user object
@@ -143,15 +144,26 @@ function Navbar() {
 
               <div className="absolute right-0 mt-3 w-52 bg-white border border-gray-100 shadow-xl rounded-xl p-2 animate-fade">
 
-                {["Profile","Wallet","Dashboard"].map((item)=>(
+                <Link
+                  to="/profile"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition"
+                >
+                  Profile
+                </Link>
+                <Link
+                  to="/wallet"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition"
+                >
+                  Wallet
+                </Link>
+                {currentUser?.role === "ADMIN" && (
                   <Link
-                    key={item}
-                    to={`/${item.toLowerCase()}`}
+                    to="/admin/dashboard"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition"
                   >
-                    {item}
+                    Admin Dashboard
                   </Link>
-                ))}
+                )}
 
                 <div className="border-t my-2"/>
 

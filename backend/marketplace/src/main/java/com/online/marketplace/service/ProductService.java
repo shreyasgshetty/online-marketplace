@@ -59,6 +59,7 @@ public class ProductService {
         }
 
         Product product = builder.build();
+        product.setModerationStatus("PENDING");
 
         return productRepository.save(product);
     }
