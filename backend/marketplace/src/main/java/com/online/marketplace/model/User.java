@@ -21,6 +21,7 @@ public class User {
     private String state;
     private double latitude;
     private double longitude;
+    private Double walletBalance = 0.0;
 
     public User() {
     }
@@ -82,6 +83,10 @@ public class User {
         return longitude;
     }
 
+    public Double getWalletBalance() {
+        return walletBalance;
+    }
+
     // ---------- SETTERS ----------
 
     public void setId(String id) {
@@ -131,4 +136,9 @@ public class User {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public void setWalletBalance(Double walletBalance) {
+        this.walletBalance = walletBalance;
+    }
+
 }

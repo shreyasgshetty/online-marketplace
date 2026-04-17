@@ -42,6 +42,9 @@ public class Product {
 
     private LocalDateTime createdAt;
 
+    private Double currentBid;
+    private String highestBidder;
+
     public Product() {
     }
 
@@ -192,4 +195,21 @@ public class Product {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public Double getCurrentBid() {
+        return currentBid;
+    }
+
+    public void setCurrentBid(Double currentBid) {
+        this.currentBid = currentBid;
+    }
+
+    public String getHighestBidder() {
+        return highestBidder;
+    }
+
+    public void setHighestBidder(String highestBidder) {
+        this.highestBidder = highestBidder;
+    }
+
 }

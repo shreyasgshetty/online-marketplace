@@ -13,6 +13,7 @@ public class UserFactory {
         user.setName(inputUser.getName());
         user.setEmail(inputUser.getEmail());
         user.setRole(Role.USER);
+        user.setWalletBalance(0.0);
 
         // Google user
         if (inputUser.getPassword() == null || inputUser.getPassword().equals("GOOGLE_AUTH")) {

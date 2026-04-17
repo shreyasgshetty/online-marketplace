@@ -6,6 +6,9 @@ import FinanceDashboard from "./pages/FinanceManager/FinanceDashboard";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SellProduct from "./pages/SellProduct";
+import Auction from "./pages/Auction";
+import AuctionDetails from "./pages/AuctionDetails";
+import Wallet from "./pages/Wallet";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/sell" element={<SellProduct />} />
+          <Route path="/auction" element={<Auction />} />
+          <Route path="/auction/:id" element={<AuctionDetails />} />
+          <Route path="/wallet" element={<Wallet />} />
         </Routes>
       </BrowserRouter>
     </div>
