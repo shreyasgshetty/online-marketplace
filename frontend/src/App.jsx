@@ -6,18 +6,17 @@ import FinanceDashboard from "./pages/FinanceManager/FinanceDashboard";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import SellProduct from "./pages/SellProduct";
-<<<<<<< Updated upstream
 import Auction from "./pages/Auction";
-import AuctionDetails from "./pages/AuctionDetails";
+import ProductDetails from "./pages/ProductDetails";
 import Wallet from "./pages/Wallet";
-=======
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import AdminBanners from "./pages/Admin/AdminBanners";
 import AdminRouteGuard from "./components/admin/AdminRouteGuard";
 import AdminLayout from "./components/admin/AdminLayout";
->>>>>>> Stashed changes
+import FinanceWithdrawals from "./pages/FinanceManager/FinanceWithdrawals";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
   return (
@@ -40,8 +39,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/sell" element={<SellProduct />} />
           <Route path="/auction" element={<Auction />} />
-          <Route path="/auction/:id" element={<AuctionDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/finance/withdrawals" element={<FinanceWithdrawals />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -47,6 +47,10 @@ public class Product {
 
     private Double currentBid;
     private String highestBidder;
+    private String buyerEmail;
+    private String status;
+    private boolean sellerConfirmed;
+    private boolean buyerConfirmed;
 
     public Product() {
     }
@@ -199,7 +203,6 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-<<<<<<< Updated upstream
     public Double getCurrentBid() {
         return currentBid;
     }
@@ -216,7 +219,6 @@ public class Product {
         this.highestBidder = highestBidder;
     }
 
-=======
     public String getModerationStatus() {
         return moderationStatus;
     }
@@ -240,5 +242,37 @@ public class Product {
     public void setRejectionReason(String rejectionReason) {
         this.rejectionReason = rejectionReason;
     }
->>>>>>> Stashed changes
+
+    public String getBuyerEmail() {
+        return buyerEmail;
+    }
+
+    public void setBuyerEmail(String buyerEmail) {
+        this.buyerEmail = buyerEmail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isSellerConfirmed() {
+        return sellerConfirmed;
+    }
+
+    public void setSellerConfirmed(boolean sellerConfirmed) {
+        this.sellerConfirmed = sellerConfirmed;
+    }
+
+    public boolean isBuyerConfirmed() {
+        return buyerConfirmed;
+    }
+
+    public void setBuyerConfirmed(boolean buyerConfirmed) {
+        this.buyerConfirmed = buyerConfirmed;
+    }
+
 }

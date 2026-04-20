@@ -12,9 +12,7 @@ const [trending,setTrending]=useState([]);
 const [recommended,setRecommended]=useState([]);
 
 useEffect(()=>{
-
 loadHome();
-
 },[]);
 
 const loadHome=async()=>{
@@ -25,6 +23,14 @@ const recommendedRes=await API.get("/api/products/recommended");
 setTrending(trendingRes.data);
 setRecommended(recommendedRes.data);
 
+};
+
+// ✅ FILTER LOGIC
+const filterProducts = (products) => {
+  return products.filter(p =>
+    p.sellingType === "fixed" &&
+    p.status === "AVAILABLE"
+  );
 };
 
 return(
@@ -39,14 +45,14 @@ return(
 
 <ProductCarousel
 title="Trending Products"
-products={trending}
+products={filterProducts(trending)}
 />
 
 <CategoryBanners/>
 
 <ProductCarousel
 title="Recommended For You"
-products={recommended}
+products={filterProducts(recommended)}
 />
 
 </div>

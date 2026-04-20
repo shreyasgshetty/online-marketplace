@@ -183,7 +183,7 @@ function Auction() {
             {filtered.map(p => (
               <div
                 key={p.id}
-                onClick={() => navigate(`/auction/${p.id}`)}
+                onClick={() => navigate(`/product/${p.id}`)}
                 className="group flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer overflow-hidden"
               >
                 {/* IMAGE WRAPPER (Handles varying aspect ratios perfectly) */}

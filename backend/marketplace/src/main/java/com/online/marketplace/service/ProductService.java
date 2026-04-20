@@ -17,18 +17,28 @@ public class ProductService {
 
     public Product createProduct(Product req) {
 
-        // ✅ Validation (VERY IMPORTANT FOR MARKS)
-        if ("fixed".equals(req.getSellingType()) && req.getPrice() == null) {
+        // ================= VALIDATION =================
+
+        if ("fixed".equalsIgnoreCase(req.getSellingType())
+                && req.getPrice() == null) {
             throw new RuntimeException("Price is required for fixed selling");
         }
 
-        if ("auction".equals(req.getSellingType())) {
-            if (req.getBaseBidPrice() == null || req.getAuctionStart() == null || req.getAuctionEnd() == null) {
+        if ("auction".equalsIgnoreCase(req.getSellingType())) {
+
+            if (req.getBaseBidPrice() == null
+                    || req.getAuctionStart() == null
+                    || req.getAuctionEnd() == null) {
                 throw new RuntimeException("Auction details missing");
+            }
+
+            if (req.getAuctionEnd().isBefore(req.getAuctionStart())) {
+                throw new RuntimeException("Auction end must be after start");
             }
         }
 
-        // ✅ Build product using Builder Pattern
+        // ================= BUILDER =================
+
         ProductBuilder builder = new ProductBuilder()
                 .setSellerEmail(req.getSellerEmail())
                 .setTitle(req.getTitle())
@@ -44,22 +54,49 @@ public class ProductService {
                 .setSellingType(req.getSellingType())
                 .setCreatedAt(LocalDateTime.now());
 
-        // ✅ Selling Type Logic
-        if ("fixed".equals(req.getSellingType())) {
+        Product product;
+
+        // ================= FIXED PRICE =================
+        if ("fixed".equalsIgnoreCase(req.getSellingType())) {
 
             builder.setPrice(req.getPrice());
 
-        } else if ("auction".equals(req.getSellingType())) {
+            product = builder.build();
+
+            // 🔥 IMPORTANT FOR HOME PAGE FILTERING
+            product.setStatus("AVAILABLE");
+
+        }
+
+        // ================= AUCTION =================
+        else {
 
             builder.setAuction(
                     req.getBaseBidPrice(),
                     req.getBidIncrement(),
                     req.getAuctionStart(),
                     req.getAuctionEnd());
+
+            product = builder.build();
+
+            // 🔥 INITIAL BID STATE
+            product.setCurrentBid(req.getBaseBidPrice());
+            product.setHighestBidder(null);
+
+            // 🔥 STATUS BASED ON TIME
+            if (req.getAuctionStart().isAfter(LocalDateTime.now())) {
+                product.setStatus("UPCOMING");
+            } else {
+                product.setStatus("LIVE");
+            }
         }
 
-        Product product = builder.build();
+        // ================= COMMON FIELDS =================
+
         product.setModerationStatus("PENDING");
+
+        product.setSellerConfirmed(false);
+        product.setBuyerConfirmed(false);
 
         return productRepository.save(product);
     }

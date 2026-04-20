@@ -33,11 +33,13 @@ public class ProductController {
     }
 
     @GetMapping("/trending")
-    public List<Product> getTrendingProducts() {
+    public List<Product> getTrending() {
 
-        List<Product> products = productRepository.findAll();
-
-        return products.stream().limit(10).toList();
+        return productRepository.findAll()
+                .stream()
+                .filter(p -> "fixed".equalsIgnoreCase(p.getSellingType()) &&
+                        "AVAILABLE".equalsIgnoreCase(p.getStatus()))
+                .toList();
     }
 
     @GetMapping("/recommended")
@@ -53,6 +55,26 @@ public class ProductController {
 
         return productRepository.findByCategory(category);
 
+    }
+
+    @PostMapping("/buy")
+    public Product buyProduct(@RequestParam String productId,
+            @RequestParam String buyerEmail) {
+
+        Product p = productRepository.findById(productId).orElseThrow();
+
+        if (!"fixed".equalsIgnoreCase(p.getSellingType())) {
+            throw new RuntimeException("Not a fixed price product");
+        }
+
+        if (p.getStatus() != null && !p.getStatus().equals("LIVE")) {
+            throw new RuntimeException("Product not available");
+        }
+
+        p.setBuyerEmail(buyerEmail);
+        p.setStatus("AWAITING_CONFIRMATION");
+
+        return productRepository.save(p);
     }
 
 }

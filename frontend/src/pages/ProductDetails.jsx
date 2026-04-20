@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
 
-function AuctionDetails() {
+function ProductDetails() {
   const { id } = useParams();
 
   const [product, setProduct] = useState({});
@@ -106,6 +106,28 @@ function AuctionDetails() {
     }
   };
 
+  // 🛒 BUY FUNCTION (FIXED PRODUCT)
+const buyNow = async () => {
+  if (!user) {
+    alert("Please log in to buy.");
+    return;
+  }
+console.log(product);
+  try {
+    await API.post("/api/products/buy", null, {
+      params: {
+        productId: id,
+        buyerEmail: user.email
+      }
+    });
+
+    alert("✅ Purchase initiated!");
+    loadProduct();
+  } catch (err) {
+    alert(err.response?.data || "Purchase failed");
+  }
+};
+
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -184,29 +206,40 @@ function AuctionDetails() {
                 {product.title}
               </h1>
 
-              {/* TIMER */}
-              <div className={`flex items-center gap-2 inline-flex px-4 py-2 rounded-xl mb-6 font-semibold shadow-sm ${isEnded ? 'bg-gray-100 text-gray-600' : 'bg-red-50 text-red-600 border border-red-100'}`}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                {timeLeft}
-              </div>
+              {/* TIMER (ONLY FOR AUCTION) */}
+{product.sellingType === "auction" && (
+<div className={`flex items-center gap-2 inline-flex px-4 py-2 rounded-xl mb-6 font-semibold shadow-sm ${isEnded ? 'bg-gray-100 text-gray-600' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  {timeLeft}
+</div>
+)}
 
               {/* PRICING */}
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <p className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-wider">Current Highest Bid</p>
+                <p className="text-sm font-medium text-gray-500 mb-1 uppercase tracking-wider">
+  {product.sellingType === "auction" ? "Current Highest Bid" : "Price"}
+</p>
                 <div className="flex items-end gap-3 mb-2">
                   <h2 className="text-4xl font-black text-gray-900">
-                    ₹{(product.currentBid || product.baseBidPrice)?.toLocaleString('en-IN')}
+                    ₹{product.sellingType === "auction"
+  ? (product.currentBid || product.baseBidPrice)?.toLocaleString('en-IN')
+  : product.price?.toLocaleString('en-IN')}
                   </h2>
                 </div>
-                
+                {product.sellingType === "auction" && (
                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
                   <p className="text-sm text-gray-500">Base Price: <span className="font-semibold text-gray-800">₹{product.baseBidPrice?.toLocaleString('en-IN')}</span></p>
                   <p className="text-sm text-gray-500">Highest Bidder: <span className="font-semibold text-blue-600">{product.highestBidder || "None"}</span></p>
                 </div>
+                )}
               </div>
 
               {/* BIDDING ACTIONS */}
-              {!isEnded && (
+              {product.sellingType === "auction" && !isEnded && (
+
                 <div className="mt-6 space-y-4">
                   <button
                     onClick={placeIncrementBid}
@@ -245,6 +278,7 @@ function AuctionDetails() {
             </div>
 
             {/* AUCTION DETAILS GRID */}
+            {product.sellingType === "auction" && (
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
               <h3 className="font-bold text-gray-900 mb-4">Auction Details</h3>
               <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
@@ -266,6 +300,58 @@ function AuctionDetails() {
                 </div>
               </div>
             </div>
+            )}                
+
+            {/* ================= FIXED PRODUCT ACTION ================= */}
+{product.sellingType === "fixed" && (
+<div className="mt-6 space-y-4">
+
+  {product.status === "LIVE" && (
+    <button
+      onClick={buyNow}
+      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl text-lg"
+    >
+      Buy Now
+    </button>
+  )}
+
+  {/* CONFIRMATION FLOW */}
+  {product.status === "AWAITING_CONFIRMATION" && (
+    <div className="flex gap-3">
+
+      {user?.email === product.sellerEmail && !product.sellerConfirmed && (
+        <button
+          onClick={async ()=>{
+            await API.post("/api/transaction/seller-confirm", null, {
+              params:{ productId:id }
+            });
+            loadProduct();
+          }}
+          className="bg-green-500 text-white px-4 py-2 rounded"
+        >
+          Confirm Sold
+        </button>
+      )}
+
+      {user?.email === product.buyerEmail && !product.buyerConfirmed && (
+        <button
+          onClick={async ()=>{
+            await API.post("/api/transaction/buyer-confirm", null, {
+              params:{ productId:id }
+            });
+            loadProduct();
+          }}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Confirm Received
+        </button>
+      )}
+
+    </div>
+  )}
+
+</div>
+)}
 
             {/* SELLER CARD */}
             {seller.email && (
@@ -313,4 +399,5 @@ function AuctionDetails() {
   );
 }
 
-export default AuctionDetails;
+
+export default ProductDetails;

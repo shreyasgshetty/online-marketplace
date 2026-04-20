@@ -87,6 +87,7 @@ public class ProductBuilder {
         product.setBidIncrement(bidIncrement);
         product.setAuctionStart(start);
         product.setAuctionEnd(end);
+        product.setStatus("LIVE");
 
         return this;
     }

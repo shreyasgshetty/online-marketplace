@@ -156,14 +156,12 @@ function Navbar() {
                 >
                   Wallet
                 </Link>
-                {currentUser?.role === "ADMIN" && (
-                  <Link
-                    to="/admin/dashboard"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition"
-                  >
-                    Admin Dashboard
-                  </Link>
-                )}
+                <Link
+                  to="/dashboard"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition"
+                >
+                  Dashboard
+                </Link>
 
                 <div className="border-t my-2"/>
 

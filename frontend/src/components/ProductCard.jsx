@@ -1,34 +1,27 @@
-import { Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ product }) {
 
+const navigate = useNavigate();
+
 return (
 
-<div className="bg-white rounded-xl shadow hover:shadow-lg transition p-3 w-[220px]">
-
-<div className="relative">
+<div
+onClick={() => navigate(`/product/${product.id}`)}
+className="cursor-pointer bg-white p-3 shadow rounded hover:shadow-lg transition"
+>
 
 <img
-src={product.images[0]}
-className="h-40 w-full object-cover rounded-lg"
+src={product.images?.[0]}
+className="h-40 w-full object-cover rounded"
 />
 
-<button className="absolute top-2 right-2 bg-white p-1 rounded-full shadow">
-<Heart size={16}/>
-</button>
-
-</div>
-
-<h3 className="font-semibold mt-3 truncate">
+<h3 className="mt-2 font-semibold">
 {product.title}
 </h3>
 
-<p className="text-sm text-gray-500">
-{product.category}
-</p>
-
-<p className="text-indigo-600 font-bold mt-1">
-₹{product.price || product.baseBidPrice}
+<p className="text-green-600 font-bold">
+₹ {product.price || product.currentBid}
 </p>
 
 </div>
