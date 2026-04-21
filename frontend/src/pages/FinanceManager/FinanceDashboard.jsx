@@ -134,6 +134,25 @@ function FinanceDashboard() {
             </p>
           </div>
 
+          {/* 6. Platform Fee Earned */}
+<div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+  <div className="flex items-center gap-3 mb-4">
+    <div className="bg-purple-50 p-3 rounded-xl">
+      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+          d="M12 8c-3 0-4 1.5-4 3s1 3 4 3 4 1.5 4 3-1 3-4 3m0-12v12" />
+      </svg>
+    </div>
+    <h2 className="text-gray-500 font-bold tracking-wide">
+      Platform Revenue (2.5%)
+    </h2>
+  </div>
+
+  <p className="text-3xl font-extrabold text-gray-900 mt-auto">
+    ₹{stats.totalPlatformFee?.toLocaleString('en-IN') || 0}
+  </p>
+</div>
+
         </div>
       </div>
     </div>

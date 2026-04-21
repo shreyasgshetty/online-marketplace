@@ -54,7 +54,7 @@ function CategoryBanners() {
           >
             {/* Main Card Container */}
             <div 
-            onClick={() => navigate(`/${cat.name.toLowerCase()}`)}
+            onClick={() => navigate(`/category/${cat.name.toLowerCase()}`)}
             className="relative h-48 w-full overflow-hidden rounded-3xl bg-neutral-100 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-500/10 sm:h-64 lg:h-72">
               
               {/* Image with Parallax Zoom */}

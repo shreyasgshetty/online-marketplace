@@ -200,7 +200,7 @@ function UserDashboard() {
                         </div>
                       </div>
                       <div className="bg-amber-50/50 rounded-xl p-4 mb-6 border border-amber-100">
-                        <p className="text-sm text-gray-600 font-medium">Please dispatch the item and confirm to receive your payment of <strong className="text-gray-900">₹{(p.currentBid - p.currentBid * 0.025).toLocaleString('en-IN')}</strong>.</p>
+                        <p className="text-sm text-gray-600 font-medium">Please dispatch the item and confirm to receive your payment of <strong className="text-gray-900">₹{(p.price - p.price * 0.025).toLocaleString('en-IN')}</strong>.</p>
                       </div>
                       <button
                         onClick={async () => {
@@ -231,7 +231,7 @@ function UserDashboard() {
                         </div>
                       </div>
                       <div className="bg-blue-50/50 rounded-xl p-4 mb-6 border border-blue-100">
-                        <p className="text-sm text-gray-600 font-medium">Confirm you have received the item to release the <strong className="text-gray-900">₹{p.currentBid.toLocaleString('en-IN')}</strong> hold on your wallet.</p>
+                        <p className="text-sm text-gray-600 font-medium">Confirm you have received the item to release the <strong className="text-gray-900">₹ {(p.price || p.currentBid || p.baseBidPrice)?.toLocaleString('en-IN')}</strong> hold on your wallet.</p>
                       </div>
                       <button
                         onClick={async () => {

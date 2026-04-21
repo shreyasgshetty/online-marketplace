@@ -7,14 +7,18 @@ public class FinanceStats {
     private long approved;
     private long rejected;
     private long pending;
+    private double totalPlatformFee;
 
     public FinanceStats(double totalWallet, int totalTransactions,
-            long approved, long rejected, long pending) {
+            long approved, long rejected, long pending,
+            double totalPlatformFee) {
+
         this.totalWallet = totalWallet;
         this.totalTransactions = totalTransactions;
         this.approved = approved;
         this.rejected = rejected;
         this.pending = pending;
+        this.totalPlatformFee = totalPlatformFee;
     }
 
     public double getTotalWallet() {
@@ -35,5 +39,9 @@ public class FinanceStats {
 
     public long getPending() {
         return pending;
+    }
+
+    public double getTotalPlatformFee() {
+        return totalPlatformFee;
     }
 }

@@ -67,7 +67,7 @@ public class ProductController {
             throw new RuntimeException("Not a fixed price product");
         }
 
-        if (p.getStatus() != null && !p.getStatus().equals("LIVE")) {
+        if (p.getStatus() != null && !p.getStatus().equals("AVAILABLE")) {
             throw new RuntimeException("Product not available");
         }
 

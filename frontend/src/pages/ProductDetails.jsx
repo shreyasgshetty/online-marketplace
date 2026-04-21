@@ -306,7 +306,7 @@ console.log(product);
 {product.sellingType === "fixed" && (
 <div className="mt-6 space-y-4">
 
-  {product.status === "LIVE" && (
+  {product.status === "AVAILABLE" && (
     <button
       onClick={buyNow}
       className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl text-lg"

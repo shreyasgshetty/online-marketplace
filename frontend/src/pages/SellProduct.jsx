@@ -307,10 +307,6 @@ Use tags to help buyers find your product faster.
                       />
                     </div>
                   </div>
-                  <label className="flex items-center gap-3 p-5 rounded-2xl bg-slate-50 border-2 border-transparent hover:border-indigo-100 cursor-pointer transition-all">
-                    <input type="checkbox" checked={negotiable} onChange={() => setNegotiable(!negotiable)} className="w-5 h-5 accent-indigo-600" />
-                    <span className="font-bold text-slate-700 text-sm">Allow Negotiation</span>
-                  </label>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in zoom-in-95 duration-500">

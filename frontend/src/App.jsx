@@ -17,6 +17,7 @@ import AdminRouteGuard from "./components/admin/AdminRouteGuard";
 import AdminLayout from "./components/admin/AdminLayout";
 import FinanceWithdrawals from "./pages/FinanceManager/FinanceWithdrawals";
 import UserDashboard from "./pages/UserDashboard";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/finance/withdrawals" element={<FinanceWithdrawals />} />
           <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
         </Routes>
       </BrowserRouter>
     </div>

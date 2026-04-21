@@ -45,7 +45,19 @@ public class TransactionService {
             User buyer = userRepository.findByEmail(p.getBuyerEmail()).get();
             User seller = userRepository.findByEmail(p.getSellerEmail()).get();
 
-            double amount = p.getCurrentBid();
+            double amount = 0;
+
+            if ("auction".equalsIgnoreCase(p.getSellingType())) {
+                if (p.getCurrentBid() == null) {
+                    throw new RuntimeException("Auction ended but no bid found");
+                }
+                amount = p.getCurrentBid();
+            } else if ("fixed".equalsIgnoreCase(p.getSellingType())) {
+                if (p.getPrice() == null) {
+                    throw new RuntimeException("Fixed product has no price");
+                }
+                amount = p.getPrice();
+            }
 
             double fee = amount * 0.025;
             double sellerAmount = amount - fee;

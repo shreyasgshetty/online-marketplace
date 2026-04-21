@@ -130,7 +130,7 @@ function HeroCarousel() {
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.5 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => navigate(`/${b.redirectCategory}`)}
+                          onClick={() => navigate(`/category/${b.redirectCategory}`)}
                           className="group/btn relative flex items-center gap-2 md:gap-3 overflow-hidden rounded-xl md:rounded-2xl bg-white px-6 py-3 md:px-10 md:py-4 text-sm md:text-base font-bold text-black transition-all"
                         >
                           <span className="relative z-10">Explore Now</span>
